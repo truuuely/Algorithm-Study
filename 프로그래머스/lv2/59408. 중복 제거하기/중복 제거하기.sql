@@ -1,0 +1,3 @@
+-- COUNT(컬럼명) : null인 값 제외하고 집계
+
+SELECT COUNT(DISTINCT(NAME)) FROM ANIMAL_INS;
