@@ -1,0 +1,8 @@
+-- 동물 이름 중 두 번 이상 쓰인 이름과 해당 이름이 쓰인 횟수 조회
+-- NAME은 null일 수 있음
+SELECT NAME, COUNT(NAME) AS COUNT
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL
+GROUP BY NAME
+HAVING COUNT > 1
+ORDER BY NAME;
