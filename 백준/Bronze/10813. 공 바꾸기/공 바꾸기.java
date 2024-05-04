@@ -1,10 +1,16 @@
-import java.util.Scanner;
+
+import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
         int[] baskets = new int[n + 1];
 
@@ -13,16 +19,20 @@ public class Main {
         }
 
         for (int a = 0; a < m; a++) {
-            int i = sc.nextInt();
-            int j = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int i = Integer.parseInt(st.nextToken());
+            int j = Integer.parseInt(st.nextToken());
 
              int tmp = baskets[i];
              baskets[i] = baskets[j];
              baskets[j] = tmp;
         }
+        br.close();
 
         for (int i = 1; i < baskets.length; i++) {
-            System.out.print(baskets[i] + " ");
+            bw.write(baskets[i] + " ");
         }
+        bw.flush();
+        bw.close();
     }
 }
