@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -21,13 +20,10 @@ public class Main {
             int i = Integer.parseInt(st.nextToken());
             int j = Integer.parseInt(st.nextToken());
 
-            Stack<Integer> stack = new Stack<>();
-            for (int b = i; b <= j; b++) {
-                stack.push(basket[b]);
-            }
-
-            for (int b = i; b <= j; b++) {
-                basket[b] = stack.pop();
+            while (i < j) {
+                int tmp = basket[i];
+                basket[i++] = basket[j];
+                basket[j--] = tmp;
             }
         }
 
@@ -35,6 +31,6 @@ public class Main {
         for (int i = 1; i < basket.length; i++) {
             sb.append(basket[i] + " ");
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }
