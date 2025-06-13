@@ -8,26 +8,20 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
-        StringTokenizer st;
         List<Queue<String>> parrotWords = new ArrayList<>();
-        for (int i = 0; i < N; i++) { // 100
-            Queue<String> queue = new LinkedList<>();
-            st = new StringTokenizer(br.readLine());
-            while (st.hasMoreTokens()) { // 최대 100개
-                queue.add(st.nextToken());
-            }
+        for (int i = 0; i < N; i++) { // 최대 100
+            Queue<String> queue = new LinkedList<>(Arrays.asList(br.readLine().split(" ")));
             parrotWords.add(queue);
         }
 
         String[] L = br.readLine().split(" "); // 받아적은 문장
-        for (int i = 0; i < L.length; i++) { // 10000
-            String word = L[i];
+        for (String word : L) { // 최대 10000
             boolean isContained = false;
-            for (int j = 0; j < parrotWords.size(); j++) {
-                Queue<String> queue = parrotWords.get(j);
+            for (Queue<String> queue : parrotWords) { // 최대 100
                 if (!queue.isEmpty() && word.equals(queue.peek())) {
                     queue.poll();
                     isContained = true;
+                    break;
                 }
             }
 
@@ -37,14 +31,13 @@ public class Main {
             }
         }
 
-        boolean isPossible = true;
-        for (Queue q : parrotWords) {
+        for (Queue<String> q : parrotWords) {
             if (!q.isEmpty()) {
-                isPossible = false;
-                break;
+                System.out.println("Impossible");
+                return;
             }
         }
 
-        System.out.println(isPossible ? "Possible" : "Impossible");
+        System.out.println("Possible");
     }
 }
