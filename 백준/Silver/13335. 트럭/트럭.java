@@ -19,32 +19,23 @@ public class Main {
             trucks.add(Integer.parseInt(st.nextToken()));
         }
 
-        int[] road = new int[w]; // 다리 길이만큼 0
-        
-        // 첫 번째 트럭먼저 다리 위에 올리기 (while 문 종료 조건 때문)
-        int time = 1;
-        road[w - 1] = trucks.poll();
-        int weightSum = road[w - 1];
-        while (weightSum > 0) {
-            time += 1;
+        Queue<Integer> road = new LinkedList<>();
+        for (int i = 0; i < w; i++) {
+            road.add(0); // 다리를 0으로 표시
+        }
 
-            // 다리 위 트럭 한 칸씩 이동
-            for (int i = 0; i < w; i++) {
-                if (road[i] != 0) { // 트럭이 있다
-                    if (i == 0) { // 다리를 빠져나간다
-                        weightSum -= road[i];
-                        road[i] = 0;
-                    } else { // 건너는 중이다
-                        road[i - 1] = road[i];
-                        road[i] = 0;
-                    }
+        int time = 0;
+        int weightSum = 0;
+        while (!road.isEmpty()) {
+            time++;
+            weightSum -= road.poll();
+            if (!trucks.isEmpty()) { // 다음 트럭이 있을 때만 다리에 0 추가됨
+                if (trucks.peek() + weightSum <= L) {
+                    weightSum += trucks.peek();
+                    road.add(trucks.poll());
+                } else {
+                    road.add(0);
                 }
-            }
-
-            // 다음 트럭 다리 위로
-            if (!trucks.isEmpty() && trucks.peek() + weightSum <= L) {
-                road[w - 1] = trucks.poll();
-                weightSum += road[w - 1];
             }
         }
 
