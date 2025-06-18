@@ -50,7 +50,7 @@ public class Main {
         }
 
         // 정답은 오름차순으로 출력
-        Arrays.stream(ans).sorted().forEach(l -> System.out.print(l + " "));
+        Arrays.stream(ans).forEach(l -> System.out.print(l + " "));
 
     }
 
