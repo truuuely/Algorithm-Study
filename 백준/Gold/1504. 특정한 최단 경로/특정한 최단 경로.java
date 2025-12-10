@@ -69,7 +69,7 @@ public class Main {
             }
 
             for (Edge next : graph[end]) {
-                int newLength = length + next.length;
+                int newLength = dp[cur.end] + next.length;
 
                 if (newLength < dp[next.end]) {
                     dp[next.end] = newLength;
