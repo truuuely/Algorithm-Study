@@ -12,9 +12,7 @@ class Solution {
         }
 
         for (String s : completion) {
-            if (map.get(s) > 0) {
-                map.put(s, map.get(s) - 1);
-            }
+            map.put(s, map.get(s) - 1);
         }
 
         for (String key : map.keySet()) {
